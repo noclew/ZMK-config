@@ -90,3 +90,43 @@ jobs:
         with:
           name: firmware
           path: vanana-rev2-nano_v2.uf2
+
+      # Clear build directory
+      - name: delete compilation residue
+        run:  rm -rf build/zephyr/*
+
+      # Vananasplit_left with nice_nano v2
+      - name: West Build (vananasplit with nano2)
+        run: west build -s zmk/app -p -b nice_nano_v2 -- -DSHIELD=vananasplit_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      - name: vananasplit_left DTS File
+        if: ${{ always() }}
+        run: cat -n build/zephyr/nice_nano_v2.dts.pre.tmp
+      - name: vananasplit_left Kconfig file
+        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
+      - name: Rename zmk.uf2
+        run: cp build/zephyr/zmk.uf2 vananasplit_left-nano_v2.uf2
+      - name: Archive (vananasplit_left)
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmware
+          path: vananasplit_left-nano_v2.uf2
+          
+      # Clear build directory
+      - name: delete compilation residue
+        run:  rm -rf build/zephyr/*
+
+      # Vananasplit_right with nice_nano v2
+      - name: West Build (vananasplit with nano2)
+        run: west build -s zmk/app -p -b nice_nano_v2 -- -DSHIELD=vananasplit_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      - name: vananasplit_left DTS File
+        if: ${{ always() }}
+        run: cat -n build/zephyr/nice_nano_v2.dts.pre.tmp
+      - name: vananasplit_right Kconfig file
+        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
+      - name: Rename zmk.uf2
+        run: cp build/zephyr/zmk.uf2 vananasplit_right-nano_v2.uf2
+      - name: Archive (vananasplit_right)
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmware
+          path: vananasplit_right-nano_v2.uf2
