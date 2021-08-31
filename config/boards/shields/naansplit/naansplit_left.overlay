@@ -1,0 +1,23 @@
+/*
+ * Copyright (c) 2020 Ryan Cross
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "naansplit.dtsi"
+
+&kscan0 {
+	col-gpios
+		= <&gpio1 11 GPIO_ACTIVE_HIGH>
+		, <&gpio0 10 GPIO_ACTIVE_HIGH>
+		, <&gpio0 9  GPIO_ACTIVE_HIGH>
+		, <&gpio0 29 GPIO_ACTIVE_HIGH>
+		, <&gpio0 2  GPIO_ACTIVE_HIGH>
+		, <&gpio1 15 GPIO_ACTIVE_HIGH>
+		, <&gpio0 11 GPIO_ACTIVE_HIGH>
+		;
+};
+
+&left_encoder {
+	status = "okay";
+};

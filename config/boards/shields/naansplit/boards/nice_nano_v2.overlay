@@ -13,7 +13,7 @@
         reg = <0>; /* ignored, but necessary for SPI bindings */
         spi-max-frequency = <4000000>;    
         /* WS2812 */
-        chain-length = <27>; /* number of LEDs */
+        chain-length = <35>; /* number of LEDs */
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
     };
@@ -22,5 +22,11 @@
 / {
 	chosen {
 		zmk,underglow = &led_strip;
+	};
+};
+
+/ {
+	ext-power {
+		init-delay-ms = <50>;
 	};
 };
